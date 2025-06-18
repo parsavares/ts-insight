@@ -1,0 +1,43 @@
+{
+    "dataset_name": "Appenzeller-Herzog_2019",
+    "device": "cuda",
+    "seed": 51,
+    "graph_include_edges": {
+        "citation": true,
+        "author": true,
+        "institution": true,
+        "topic": false,
+        "coauthor": true,
+        "concept": false,
+        "semantic": true,
+        "mesh": true
+    },
+    "cache_embeddings": true,
+    "embedding_model_name": "allenai/specter2_base",
+    "semantic_threshold": 0.92,
+    "collaboration_threshold": 2,
+    "gnn_hidden_channels": 128,
+    "gnn_num_layers": 1,
+    "gnn_dropout": 0.7,
+    "gnn_lr": 0.003459154058371246,
+    "gnn_weight_decay": 0.00013540038946969823,
+    "al_iterations": 50,
+    "al_batch_size": 10,
+    "al_pos_seed": 1,
+    "al_neg_seed": 1,
+    "al_epochs_per_iter": 200,
+    "al_bald_samples": 30,
+    "al_lp_edge_type": [
+        "paper",
+        "semantic",
+        "paper"
+    ],
+    "al_lp_layers": 2,
+    "al_lp_alpha": 0.55,
+    "al_lp_undirected": true,
+    "al_use_focal_loss": false,
+    "al_focal_gamma": 2.0,
+    "al_focal_alpha": 0.25,
+    "al_use_ts_forgetting": true,
+    "al_ts_discount": 0.8920770546591498
+}
