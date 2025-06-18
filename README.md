@@ -72,9 +72,9 @@ We have included sample log files from a real-world active learning experiment t
 
 1.  In the application's sidebar on the left, you will see two file uploaders under **"1. Upload Files"**.
 2.  Click the "Browse files" button for **"Upload .pt results file"**.
-3.  Navigate to the `datasets/appenzeller_2019/` folder within this project and select `*.pt`.
+3.  Navigate to the `datasets/Appenzeller-Herzog_2019/` folder within this project and select `*.pt`.
 4.  Click the "Browse files" button for **"Upload .json config file (optional)"**.
-5.  Navigate to the same folder (`datasets/appenzeller_2019/`) and select `*.json`.
+5.  Navigate to the same folder (`datasets/Appenzeller-Herzog_2019/`) and select `*.json`.
 6.  Click the **"Load Data"** button. The application will process the files, and the controls in the sidebar will become active.
 
 #### Step 2: Explore the Main Visualization
@@ -151,7 +151,7 @@ You can optionally provide a JSON file to supply metadata for your experiment, w
 
 ```json
 {
-  "dataset_name": "Appenzeller-Herzog 2019",
+  "dataset_name": "Appenzeller-Herzog_2019",
   "model_name": "MyCustomDTS",
   "al_strategy_params": {
     "ts_discount_factor": 0.99
