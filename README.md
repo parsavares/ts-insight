@@ -35,10 +35,9 @@ Follow these steps to get TS-Insight running locally on your machine.
 
 First, clone this repository to your local machine:
 ```bash
-git clone https://github.com/your-username/ts-insight.git
+git clone https://github.com/parsavares/ts-insight.git
 cd ts-insight
 ```
-*(Note: Replace `your-username/ts-insight.git` with the actual URL of your repository.)*
 
 Next, it is highly recommended to create a virtual environment to manage dependencies:
 ```bash
