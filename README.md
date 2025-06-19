@@ -17,7 +17,7 @@ This tool is the official artifact for the paper: _"TS-Insight: Visually Decodin
 
 ## Key Features
 
--   **Coordinated Multi-View Dashboard**: Simultaneously visualize the evolution of posterior beliefs (via HDR plots), raw evidence counts (`α`/`β`), and a "barcode" timeline of actions and rewards for each arm.
+-   **juxtaposes Multi-View Dashboard**: Simultaneously visualize the evolution of posterior beliefs (via HDR plots), raw evidence counts (`α`/`β`), and a "barcode" timeline of actions and rewards for each arm.
 -   **Direct Algorithm Verification**: Visually confirm that belief updates are correct and observe the "forgetting" effect of the discount factor (`γ`) in DTS.
 -   **Interactive XAI Snapshot**: Go beyond time-series analysis with a dedicated view that provides an unambiguous, at-a-glance explanation for why a specific arm was chosen at any single time step.
 -   **General-Purpose Tool**: Decoupled from any specific algorithm implementation. TS-Insight works with any TS/DTS and all TS variation system that can produce logs in a standardized `.pt` file format.
