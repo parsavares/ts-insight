@@ -3,7 +3,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Python Version](https://img.shields.io/badge/python-3.11.9-blue)
 
-# TS-Insight
+# Webapp Demo:
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ts-insight.streamlit.app/)
 
