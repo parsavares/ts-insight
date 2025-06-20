@@ -566,7 +566,6 @@ st.title("TS-Insight")
 st.markdown("""
 Thompson Sampling Arm Evolution Visualizer: Upload your experiment results (`.pt` file) and an optional configuration (`.json` file).
 Select arms, adjust the sampling range (T), and choose which plot sections to display, then press "Run Visualization".
-Numeric details for all arms within the selected T-range are available in the 'Numeric Details' tab.
 """)
 
 # --- Initialize Session State ---
