@@ -187,10 +187,12 @@ This project is licensed under the GNU General Public License v3.0.
 ## Author
 
 **Parsa Vares**  
-Luxembourg Institute of Science and Technology  
+Luxembourg Institute of Science and Technology 
+
 parsa.vares@list.lu
 
 University of Luxembourg
+
 parsa.vares.001@studen.uni.lu
 
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github&style=flat-square)](https://github.com/parsavares) [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/parsavares/)
