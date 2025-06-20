@@ -175,14 +175,23 @@ By adhering to this simple logging format, you can leverage TS-Insight to debug,
 
 We welcome contributions! Please feel free to open an issue or submit a pull request.
 
+## Contributing
+
+We welcome contributions! Please feel free to open an issue or submit a pull request.
+
 ## License
 
 This project is licensed under the GNU General Public License v3.0.  
 © 2025 Luxembourg Institute of Science and Technology  
-© 2025 Parsa Vares
 
 ## Author
 
 **Parsa Vares**  
 Luxembourg Institute of Science and Technology  
 [@parsavares](https://github.com/parsavares) · parsa.vares@list.lu
+
+University of Luxembourg
+parsa.vares.001@studen.uni.lu
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/parsavares/)
+
