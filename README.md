@@ -1,4 +1,4 @@
-# TS-Insight: A visual-analytics dashboard for Visually Decoding Thompson Sampling for Algorithm Understanding, Verification, and XAI
+# TS-Insight: Visual Decoder for Thompson Sampling
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Python Version](https://img.shields.io/badge/python-3.11.9-blue)
@@ -7,7 +7,7 @@
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ts-insight.streamlit.app/)
 
-
+A visual-analytics dashboard for Visually Decoding Thompson Sampling for Algorithm Understanding, Verification, and XAI.
 
 **TS-Insight** is an open-source, interactive web application designed to demystify Thompson Sampling (TS) and its variants like Discounted Thompson Sampling (DTS). It provides a powerful visual analytics dashboard for developers, researchers, and practitioners to understand, debug, and explain the behavior of multi-armed bandit algorithms in real-world applications such as active learning and recommendation systems.
 
@@ -23,7 +23,7 @@ This tool is the official artifact for the paper: _"TS-Insight: Visually Decodin
 
 ## Key Features
 
--   **juxtaposes Multi-View Dashboard**: Simultaneously visualize the evolution of posterior beliefs (via HDR plots), raw evidence counts (`α`/`β`), and a "barcode" timeline of actions and rewards for each arm.
+-   **Juxtaposed Multi-View Dashboard**: Simultaneously visualize the evolution of posterior beliefs (via HDR plots), raw evidence counts (`α`/`β`), and a "barcode" timeline of actions and rewards for each arm.
 -   **Direct Algorithm Verification**: Visually confirm that belief updates are correct and observe the "forgetting" effect of the discount factor (`γ`) in DTS.
 -   **Interactive XAI Snapshot**: Go beyond time-series analysis with a dedicated view that provides an unambiguous, at-a-glance explanation for why a specific arm was chosen at any single time step.
 -   **General-Purpose Tool**: Decoupled from any specific algorithm implementation. TS-Insight works with any TS/DTS and all TS variation system that can produce logs in a standardized `.pt` file format.
@@ -175,10 +175,6 @@ By adhering to this simple logging format, you can leverage TS-Insight to debug,
 
 We welcome contributions! Please feel free to open an issue or submit a pull request.
 
-## Contributing
-
-We welcome contributions! Please feel free to open an issue or submit a pull request.
-
 ## License
 
 This project is licensed under the GNU General Public License v3.0.  
@@ -187,11 +183,11 @@ This project is licensed under the GNU General Public License v3.0.
 ## Author
 
 **Parsa Vares**  
-Luxembourg Institute of Science and Technology 
+Luxembourg Institute of Science and Technology:
 parsa.vares@list.lu
 
-University of Luxembourg
-parsa.vares.001@studen.uni.lu
+University of Luxembourg:
+parsa.vares.001@student.uni.lu
 
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github&style=flat-square)](https://github.com/parsavares) [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/parsavares/)
 
