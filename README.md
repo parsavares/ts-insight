@@ -1,13 +1,14 @@
 # TS-Insight: Visual Decoder for Thompson Sampling
+A visual-analytics dashboard for Visually Decoding Thompson Sampling for Algorithm Understanding, Verification, and XAI.
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Python Version](https://img.shields.io/badge/python-3.11.9-blue)
 
 # Webapp Demo:
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ts-insight.streamlit.app/)
+Try it live: [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ts-insight.streamlit.app/)
 
-A visual-analytics dashboard for Visually Decoding Thompson Sampling for Algorithm Understanding, Verification, and XAI.
+![alt text](./figures/TS-Insight_TwoArms_InkScape.png?raw=true)
 
 **TS-Insight** is an open-source, interactive web application designed to demystify Thompson Sampling (TS) and its variants like Discounted Thompson Sampling (DTS). It provides a powerful visual analytics dashboard for developers, researchers, and practitioners to understand, debug, and explain the behavior of multi-armed bandit algorithms in real-world applications such as active learning and recommendation systems.
 
