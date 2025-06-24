@@ -27,7 +27,41 @@ Try our live webapp demo! All you have to do is:
 7. Wait a bit... (It currently can take up to 1 minute to display)
 8. And voilà!
 
-# How to read me?
+
+
+# How to Use the Tool (A Step-by-Step Guide)
+
+We have included sample log files from a real-world active learning experiment to allow you to immediately test and explore the tool's full capabilities.
+
+#### Step 1: Load the Sample Data
+
+1.  In the application's sidebar on the left, you will see two file uploaders under **"1. Upload Files"**.
+2.  Click the "Browse files" button for **"Upload .pt results file"**.
+3.  Navigate to the `datasets/Appenzeller-Herzog_2019/` folder within this project and select `*.pt`.
+4.  Click the "Browse files" button for **"Upload .json config file (optional)"**.
+5.  Navigate to the same folder (`datasets/Appenzeller-Herzog_2019/`) and select `*.json`.
+6.  Click the **"Load Data"** button. The application will process the files, and the controls in the sidebar will become active.
+
+#### Step 2: Explore the Main Visualization
+
+1.  The main "Visualization" tab is now active. You can see the evolution plots for all algorithm arms.
+2.  In the sidebar under **"2. Plot Controls"**, try the following:
+    *   **Select Arms to Visualize**: Use the multiselect dropdown to hide or show specific arms.
+    *   **Select T Range**: Drag the slider to zoom into a specific period of the experiment. For example, zoom into the first 10 steps (`0-10`) to see the initial "cold start" behavior.
+    *   **Plot Component Visibility**: Uncheck "Show Alpha/Beta Lines" or "Show Barcode Plot" to see how the views dynamically resize to give more space to the visible components.
+    *   **Mask Arm Names**: Check this box to anonymize the arm names, replacing them with "Arm 1", "Arm 2", etc.
+3.  Click the **"Run Visualization"** button to apply your changes.
+
+#### Step 3: Use the XAI Snapshot for Explanation
+
+This is the core explanatory feature of the tool.
+
+1.  Click on the **"XAI"** tab at the top of the main area.
+2.  By default, the view shows the state of the world at the first available sampling step.
+3.  Use the **"Select Sampling Step (t)"** dropdown to choose a specific moment to analyze. For a great example of exploration, select **`t = 228`**.
+    *   You will see a bar chart comparing all arms. Notice how "Arm 8" has the highest bar (posterior mean), but the black dot (posterior sample) for "Arm 7" is highest. This is the visual proof of *why* Arm 7 was chosen which initiated a shift in preference from Arm 8 to Arm 7.
+4.  Toggle the **"Show only arms selected in sidebar"** checkbox. Notice how the default behavior (unchecked) shows all arms for a complete explanation, but you can check it to focus only on the arms you've selected.
+
 
 
 
@@ -94,41 +128,6 @@ In particular, **`dataset_name`** will be used as the main title for the visuali
   "other_metadata": "Any other info you want to record."
 }
 ```
-
-# How to Use the Tool (A Step-by-Step Guide)
-
-We have included sample log files from a real-world active learning experiment to allow you to immediately test and explore the tool's full capabilities.
-
-#### Step 1: Load the Sample Data
-
-1.  In the application's sidebar on the left, you will see two file uploaders under **"1. Upload Files"**.
-2.  Click the "Browse files" button for **"Upload .pt results file"**.
-3.  Navigate to the `datasets/Appenzeller-Herzog_2019/` folder within this project and select `*.pt`.
-4.  Click the "Browse files" button for **"Upload .json config file (optional)"**.
-5.  Navigate to the same folder (`datasets/Appenzeller-Herzog_2019/`) and select `*.json`.
-6.  Click the **"Load Data"** button. The application will process the files, and the controls in the sidebar will become active.
-
-#### Step 2: Explore the Main Visualization
-
-1.  The main "Visualization" tab is now active. You can see the evolution plots for all algorithm arms.
-2.  In the sidebar under **"2. Plot Controls"**, try the following:
-    *   **Select Arms to Visualize**: Use the multiselect dropdown to hide or show specific arms.
-    *   **Select T Range**: Drag the slider to zoom into a specific period of the experiment. For example, zoom into the first 10 steps (`0-10`) to see the initial "cold start" behavior.
-    *   **Plot Component Visibility**: Uncheck "Show Alpha/Beta Lines" or "Show Barcode Plot" to see how the views dynamically resize to give more space to the visible components.
-    *   **Mask Arm Names**: Check this box to anonymize the arm names, replacing them with "Arm 1", "Arm 2", etc.
-3.  Click the **"Run Visualization"** button to apply your changes.
-
-#### Step 3: Use the XAI Snapshot for Explanation
-
-This is the core explanatory feature of the tool.
-
-1.  Click on the **"XAI"** tab at the top of the main area.
-2.  By default, the view shows the state of the world at the first available sampling step.
-3.  Use the **"Select Sampling Step (t)"** dropdown to choose a specific moment to analyze. For a great example of exploration, select **`t = 228`**.
-    *   You will see a bar chart comparing all arms. Notice how "Arm 8" has the highest bar (posterior mean), but the black dot (posterior sample) for "Arm 7" is highest. This is the visual proof of *why* Arm 7 was chosen which initiated a shift in preference from Arm 8 to Arm 7.
-4.  Toggle the **"Show only arms selected in sidebar"** checkbox. Notice how the default behavior (unchecked) shows all arms for a complete explanation, but you can check it to focus only on the arms you've selected.
-
-
 
 # Locally installing and running the application
 
