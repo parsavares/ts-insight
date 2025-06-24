@@ -1,19 +1,31 @@
 # TS-Insight: Visual Fingerprinting of Multi-Armed Bandits
-A visual-analytics dashboard for Visually Decoding Thompson Sampling for Algorithm Understanding, Verification, and XAI.
+A Visual-Analytics dashboard for visually decoding Thompson Sampling for algorithm understanding, verification, and XAI.
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Python Version](https://img.shields.io/badge/python-3.11.9-blue)
 
-# Webapp Demo:
+**TS-Insight** is an open-source web application designed to demystify Thompson Sampling (TS) and its variants, by offering visual representations of the resulting logs. It includes:
+-   **Juxtaposed Multi-View Dashboard**: Simultaneously visualize the evolution of posterior beliefs (via HDR plots), raw evidence counts (`α`/`β`), and a "barcode" timeline of actions and rewards for each arm.
+-   **Direct Algorithm Verification**: Visually confirm that belief updates are correct and observe the "forgetting" effect of the discount factor (`γ`) in DTS.
+-   **Interactive XAI Snapshot**: Go beyond time-series analysis with a dedicated view that provides an unambiguous, at-a-glance explanation for why a specific arm was chosen at any single time step.
+-   **General-Purpose Tool**: Decoupled from any specific algorithm implementation. TS-Insight works with any TS/DTS and all TS variation system that can produce logs in a standardized `.pt` file format.
 
-Try it live: [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ts-insight.streamlit.app/)
+This repository is the official companion to the poster _"TS-Insight: Visual Fingerprinting of Multi-Armed Bandits"_ @IEEE Vis 2025.
 
-![alt text](./figures/TS-Insight_TwoArms_InkScape.png?raw=true)
+![Annotated excerpt of the TS-Insight Dashboard. Two arms are shown. Arm 8 has initially a higher posterior mean, which results in a lot of sampling by this arm. This focus shifts at the sampling step t=228, where arm 7 sampled, and had a positive outcome. Readers can see the samples starting to be made by Arm 7 instead of 8 from that point onwards.](./figures/TS-Insight_TwoArms_InkScape.png?raw=true)
 
-**TS-Insight** is an open-source, interactive web application designed to demystify Thompson Sampling (TS) and its variants like Discounted Thompson Sampling (DTS). It provides a powerful visual analytics dashboard for developers, researchers, and practitioners to understand, debug, and explain the behavior of multi-armed bandit algorithms in real-world applications such as active learning and recommendation systems.
+# Quickstart:
 
-This tool is the official artifact for the paper: _"TS-Insight: Visually Decoding Thompson Sampling, an Interactive Dashboard for Algorithm Understanding, Verification, and XAI"_.
+Try our live webapp demo! All you have to do is:
 
+1. Launch our demo 👉 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ts-insight.streamlit.app/) 👈
+2. Upload one of the ```.pt``` log files [from our datasets](./datasets)
+3. (Optional) Upload the corresponding ```.json``` config file
+4. Press ```Load Data```
+5. Adjust the plots parameters (arms, subplots, sampling steps to display...)
+6. Press ```Run Visualization```
+7. Wait a bit... (It currently can take up to 1 minute to display)
+8. And voilà!
 
 *(Main time-series evolution view)*
 [ts_evo_Appenzeller-Herzog_2019_T3-502-7.pdf](https://github.com/user-attachments/files/20791319/ts_evo_Appenzeller-Herzog_2019_T3-502-7.pdf)
@@ -24,10 +36,7 @@ This tool is the official artifact for the paper: _"TS-Insight: Visually Decodin
 
 ## Key Features
 
--   **Juxtaposed Multi-View Dashboard**: Simultaneously visualize the evolution of posterior beliefs (via HDR plots), raw evidence counts (`α`/`β`), and a "barcode" timeline of actions and rewards for each arm.
--   **Direct Algorithm Verification**: Visually confirm that belief updates are correct and observe the "forgetting" effect of the discount factor (`γ`) in DTS.
--   **Interactive XAI Snapshot**: Go beyond time-series analysis with a dedicated view that provides an unambiguous, at-a-glance explanation for why a specific arm was chosen at any single time step.
--   **General-Purpose Tool**: Decoupled from any specific algorithm implementation. TS-Insight works with any TS/DTS and all TS variation system that can produce logs in a standardized `.pt` file format.
+
 
 ## Quick Start: Running the Application
 
