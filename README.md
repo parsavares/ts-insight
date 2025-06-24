@@ -19,7 +19,7 @@ This repository is the official companion to the poster _"TS-Insight: Visual Fin
 Try our live webapp demo! All you have to do is:
 
 1. Launch our demo 👉 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ts-insight.streamlit.app/) 👈
-2. Upload one of the ```.pt``` log files in the side bar ont the left [from our datasets](./datasets)
+2. Upload one of the ```.pt``` log files in the side bar on the left [from our datasets](./datasets)
 3. (Optional) Upload the corresponding ```.json``` config file to display the correct dataset name and other metadata
 4. Press ```Load Data```
 5. Adjust the plots parameters (arms, subplots, sampling steps to display...)
