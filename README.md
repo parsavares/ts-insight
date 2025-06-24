@@ -1,4 +1,4 @@
-# TS-Insight: Visual Decoder for Thompson Sampling
+# TS-Insight: Visual Fingerprinting of Multi-Armed Bandits
 A visual-analytics dashboard for Visually Decoding Thompson Sampling for Algorithm Understanding, Verification, and XAI.
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
