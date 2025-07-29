@@ -1,6 +1,7 @@
 # TS-Insight: Visual Fingerprinting of Multi-Armed Bandits
 A Visual-Analytics dashboard for visually decoding Thompson Sampling for algorithm understanding, verification, and XAI.
 
+[![arXiv](https://img.shields.io/badge/arXiv-2507.19898-b31b1b.svg)](https://arxiv.org/abs/2507.19898)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Python Version](https://img.shields.io/badge/python-3.11.9-blue)
 
@@ -179,6 +180,30 @@ We welcome contributions! Please feel free to open an issue or submit a pull req
 
 This project is licensed under the GNU General Public License v3.0.  
 © 2025 Luxembourg Institute of Science and Technology  
+
+# Cite Our Work
+
+If you use **TS-Insight** or build upon the **idea, design, or visual explanation framework** presented in our work, please cite our IEEE VIS 2025 poster paper:
+
+> **TS-Insight: Visualizing Thompson Sampling for Verification and XAI**  
+> _Parsa Vares, Éloi Durant, Jun Pang, Nicolas Médoc, Mohammad Ghoniem_  
+> Accepted as a poster at **IEEE VIS 2025 Posters** (Non-archival)  
+> [arXiv:2507.19898](https://arxiv.org/abs/2507.19898) · DOI: [10.48550/arXiv.2507.19898](https://doi.org/10.48550/arXiv.2507.19898)
+
+```bibtex
+@misc{vares2025tsinsight,
+  author       = {Parsa Vares and Éloi Durant and Jun Pang and Nicolas Médoc and Mohammad Ghoniem},
+  title        = {TS-Insight: Visualizing Thompson Sampling for Verification and XAI},
+  note         = {Accepted as a poster at IEEE VIS 2025 ("TS-Insight: Visual Fingerprinting of Multi-Armed Bandits")},
+  year         = {2025},
+  month        = {July},
+  archivePrefix= {arXiv},
+  eprint       = {2507.19898},
+  primaryClass = {cs.HC},
+  doi          = {10.48550/arXiv.2507.19898},
+  url          = {https://arxiv.org/abs/2507.19898}
+}
+
 
 # Author
 
