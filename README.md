@@ -203,7 +203,7 @@ If you use **TS-Insight** or build upon the **idea, design, or visual explanatio
   doi          = {10.48550/arXiv.2507.19898},
   url          = {https://arxiv.org/abs/2507.19898}
 }
-
+```
 
 # Author
 
