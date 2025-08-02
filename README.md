@@ -194,14 +194,16 @@ If you use **TS-Insight** or build upon the **idea, design, or visual explanatio
 @misc{vares2025tsinsight,
   author       = {Parsa Vares and Éloi Durant and Jun Pang and Nicolas Médoc and Mohammad Ghoniem},
   title        = {TS-Insight: Visualizing Thompson Sampling for Verification and XAI},
-  note         = {Accepted as a poster at IEEE VIS 2025 ("TS-Insight: Visual Fingerprinting of Multi-Armed Bandits")},
+  note         = {Presented as a poster paper at IEEE VIS 2025 ("TS-Insight: Visual Fingerprinting of Multi-Armed Bandits")},
   year         = {2025},
-  month        = {July},
+  publisher    = {arXiv},
+  doi          = {10.48550/arXiv.2507.19898},
+  url          = {https://arxiv.org/abs/2507.19898},
   archivePrefix= {arXiv},
   eprint       = {2507.19898},
   primaryClass = {cs.HC},
-  doi          = {10.48550/arXiv.2507.19898},
-  url          = {https://arxiv.org/abs/2507.19898}
+  keywords     = {Thompson Sampling, Explainable AI, Active Learning, Multi-Armed Bandits, Algorithm Visualization, Human-Computer Interaction (cs.HC), Artificial Intelligence (cs.AI), Machine Learning (cs.LG), Machine Learning (stat.ML)},
+  copyright    = {Creative Commons Attribution 4.0 International}
 }
 ```
 
