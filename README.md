@@ -2,6 +2,7 @@
 A Visual-Analytics dashboard for visually decoding Thompson Sampling for algorithm understanding, verification, and XAI.
 
 [![arXiv](https://img.shields.io/badge/arXiv-2507.19898-b31b1b.svg)](https://arxiv.org/abs/2507.19898)
+[![Demo](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ts-insight.streamlit.app/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Python Version](https://img.shields.io/badge/python-3.11.9-blue)
 
