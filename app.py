@@ -106,6 +106,40 @@ def compute_hdr_bounds(alpha_arr, beta_arr, rho=0.50, tol=1e-6):
             b_vals[i] = min(1.0, mu + δ)
     return a_vals, b_vals
 
+# --- NEW A+++++ Pre-computation Function ---
+@st.cache_data
+def precompute_values(_df):
+    """
+    Pre-computes HDR bounds and posterior means for the entire dataset.
+    Uses @st.cache_data to run only once for a given input DataFrame.
+    """
+    df_processed = _df.copy()
+    
+    # Vectorized computation of posterior mean
+    epsilon = 1e-9
+    alphas = np.maximum(df_processed['alpha_before_update'].values, epsilon)
+    betas = np.maximum(df_processed['beta_before_update'].values, epsilon)
+    df_processed['posterior_mean'] = alphas / (alphas + betas)
+    
+    # For HDR, we still iterate per arm as it's a complex calculation
+    # but this will only run ONCE thanks to the cache.
+    df_processed['hdr_lower'] = 0.0
+    df_processed['hdr_upper'] = 0.0
+    
+    unique_arms = df_processed['arm_name_of_state'].unique()
+    for arm_name in unique_arms:
+        arm_mask = df_processed['arm_name_of_state'] == arm_name
+        
+        arm_alphas = df_processed.loc[arm_mask, 'alpha_before_update'].values
+        arm_betas = df_processed.loc[arm_mask, 'beta_before_update'].values
+        
+        a_vals, b_vals = compute_hdr_bounds(arm_alphas, arm_betas, rho=0.50, tol=1e-6)
+        
+        df_processed.loc[arm_mask, 'hdr_lower'] = a_vals
+        df_processed.loc[arm_mask, 'hdr_upper'] = b_vals
+        
+    return df_processed
+    
 # --- MODIFIED Main Plotting Function for Streamlit ---
 def plot_ts_arm_evolution_streamlit(
     df_expanded_input: pd.DataFrame,    # Data for SELECTED arms & T-range
@@ -316,18 +350,21 @@ def plot_ts_arm_evolution_streamlit(
         x_axis_data_state = arm_state_data['query_num_total'].values
 
         # --- Main Plot (HDR, Mean, Draws) ---
+        # --- THIS IS THE NEW, OPTIMIZED BLOCK ---
         if ax_main:
-            alpha_vals = np.maximum(arm_state_data['alpha_before_update'].values, epsilon_beta_params)
-            beta_vals  = np.maximum(arm_state_data['beta_before_update'].values,  epsilon_beta_params)
-            a_vals, b_vals = compute_hdr_bounds(alpha_vals, beta_vals, rho=0.50, tol=1e-6)
-
+            # **CHANGE: Use precomputed values directly from the dataframe**
+            a_vals = arm_state_data['hdr_lower'].values
+            b_vals = arm_state_data['hdr_upper'].values
+            mu_vals = arm_state_data['posterior_mean'].values
+        
+            # Plot HDR regions (no computation needed)
             for idx, T_val in enumerate(x_axis_data_state):
                 a_T, b_T = a_vals[idx], b_vals[idx]
                 ax_main.fill_between([T_val, T_val], [0.0, 0.0], [a_T, a_T], color=PLOT_COLORS['explore'], zorder=2)
                 ax_main.fill_between([T_val, T_val], [a_T, a_T], [b_T, b_T], color=PLOT_COLORS['posterior_draw_marker'], zorder=3)
                 ax_main.fill_between([T_val, T_val], [b_T, b_T], [1.0, 1.0], color=PLOT_COLORS['explore'], zorder=2)
-
-            mu_vals = alpha_vals / (alpha_vals + beta_vals)
+        
+            # Plot posterior mean (precomputed)
             h_mean_line, = ax_main.plot(x_axis_data_state, mu_vals, color=PLOT_COLORS['posterior_draw_marker'], linestyle='-', linewidth=1, label='Posterior Mean (μ)', zorder=4)
             if 'posterior_mean' not in legend_handles_main: legend_handles_main['posterior_mean'] = h_mean_line
 
@@ -493,11 +530,14 @@ def plot_xai_snapshot_minimal(
     df_plot['arm_name_of_state'] = pd.Categorical(df_plot['arm_name_of_state'], categories=arms_to_plot, ordered=True)
     df_plot = df_plot.sort_values('arm_name_of_state').reset_index(drop=True)
     
-    # Calculate posterior mean
-    epsilon = 1e-9
-    alphas = np.maximum(df_plot['alpha_before_update'].values, epsilon)
-    betas = np.maximum(df_plot['beta_before_update'].values, epsilon)
-    df_plot['posterior_mean'] = alphas / (alphas + betas)
+    # --- THIS IS THE NEW, OPTIMIZED BLOCK ---
+    # **CHANGE: Use precomputed posterior_mean. Add a fallback for safety.**
+    if 'posterior_mean' not in df_plot.columns:
+        st.warning("Precomputed 'posterior_mean' not found. Calculating on-the-fly.")
+        epsilon = 1e-9
+        alphas = np.maximum(df_plot['alpha_before_update'].values, epsilon)
+        betas = np.maximum(df_plot['beta_before_update'].values, epsilon)
+        df_plot['posterior_mean'] = alphas / (alphas + betas)
     
     # --- Plotting ---
     arm_labels = df_plot['display_name']
@@ -660,7 +700,12 @@ if st.sidebar.button("Load Data", key="load_data_button"):
                     'posterior_sample': float, 'reward': float, 'arm_name_of_state': str, 'arm': str
                 })
 
-                st.session_state.df_expanded_full = df_expanded_full
+                # --- THIS IS THE NEW, OPTIMIZED BLOCK ---
+                # **NEW: PRECOMPUTE ALL VALUES AND CACHE THE RESULT**
+                with st.spinner("Pre-computing derived values for visualization..."):
+                    df_expanded_precomputed = precompute_values(df_expanded_full)
+
+                st.session_state.df_expanded_full = df_expanded_precomputed
                 st.session_state.df_log_full = df_log_full
 
                 ts_param_order_proc = list(res_proc.get('ts_final_params', {}).keys())
@@ -844,27 +889,47 @@ if st.session_state.data_loaded:
 # --- Main Area with Tabs ---
 tab_vis, tab_num = st.tabs(["Visualization", "XAI"])
 
+# --- THIS IS THE NEW, CORRECTED BLOCK ---
 with tab_vis:
+    # This tab's only job is to DISPLAY the plot if it exists.
     if st.session_state.get('plot_fig'):
         fig = st.session_state.plot_fig
-        pdf_buf = BytesIO()
-        fig.savefig(pdf_buf, format="pdf", dpi=300, bbox_inches="tight")
-        pdf_buf.seek(0)
-        st.pyplot(fig, clear_figure=True) # clear_figure=True is important after savefig
-        st.download_button(
-            label="Download Plot as PDF (Camera‐Ready)",
-            data=pdf_buf,
-            file_name=(
-                f"ts_evo_{st.session_state.dataset_name.replace(' ', '_')}"
-                f"_T{st.session_state.selected_t_range_for_display[0]}"
-                f"-{st.session_state.selected_t_range_for_display[1]}.pdf"
-            ),
-            mime="application/pdf",
-            key="download_plot_pdf"
-        )
-        # plt.close(fig) # Good practice, st.pyplot with clear_figure=True should handle it.
+        
+        # Display the persistent figure from the session state
+        st.pyplot(fig) # Display first
+
+        # --- NEW: Download Logic with Format Selection ---
+        col1_dl, col2_dl = st.columns([1, 4])
+        with col1_dl:
+            file_format = st.selectbox(
+                "Format:",
+                options=['SVG', 'PDF'], # SVG is the default
+                key="main_plot_format_select"
+            )
+
+        format_options = {
+            'SVG': {'ext': 'svg', 'mime': 'image/svg+xml'},
+            'PDF': {'ext': 'pdf', 'mime': 'application/pdf'}
+        }
+        selected_format = format_options[file_format]
+        buf = BytesIO()
+        fig.savefig(buf, format=selected_format['ext'], dpi=300, bbox_inches="tight")
+        buf.seek(0)
+        
+        with col2_dl:
+            st.download_button(
+                label=f"Download Plot as {file_format} (Camera-Ready)",
+                data=buf,
+                file_name=(
+                    f"ts_evo_{st.session_state.dataset_name.replace(' ', '_')}"
+                    f"_T{st.session_state.selected_t_range_for_display[0]}"
+                    f"-{st.session_state.selected_t_range_for_display[1]}.{selected_format['ext']}"
+                ),
+                mime=selected_format['mime'],
+                key="download_plot_main"
+            )
     elif st.session_state.data_loaded:
-        st.info("Adjust controls in the sidebar and click 'Run Visualization'.")
+        st.info("Adjust controls in the sidebar and click 'Run Visualization' to generate the main plot.")
     else:
         st.info("<- Upload a .pt file and click 'Load Data' to begin.")
 
@@ -936,7 +1001,8 @@ with tab_num:
                     # Get the mask setting from the sidebar
                     mask_names_setting = st.session_state.get('cfg_mask_arm_names', False)
                     
-                    # --- This is the new, corrected block with a download button ---
+                    # --- THIS IS THE NEW, CORRECTED BLOCK ---
+                    # --- THIS IS THE NEW, CORRECTED BLOCK ---
                     with st.spinner("Generating XAI Snapshot..."):
                         xai_fig = plot_xai_snapshot_minimal(
                             df_snapshot=df_snapshot_t,
@@ -945,24 +1011,47 @@ with tab_num:
                             mask_arm_names=mask_names_setting
                         )
                         
-                        # --- NEW: Logic for PDF download ---
-                        # Create an in-memory buffer
+                        # --- STEP 1: PREPARE ALL DOWNLOADS BEFORE DISPLAYING ---
+                        
+                        # Create an in-memory buffer for the SVG format
+                        svg_buf_xai = BytesIO()
+                        xai_fig.savefig(svg_buf_xai, format="svg", dpi=300, bbox_inches="tight")
+                        svg_buf_xai.seek(0)
+                        
+                        # Create an in-memory buffer for the PDF format
                         pdf_buf_xai = BytesIO()
-                        # Save the figure to the buffer in PDF format
-                        xai_fig.savefig(pdf_buf_xai, format="pdf", dpi=300)
+                        xai_fig.savefig(pdf_buf_xai, format="pdf", dpi=300, bbox_inches="tight")
                         pdf_buf_xai.seek(0)
                         
-                        # Display the plot in Streamlit
+                        # --- STEP 2: DISPLAY THE PLOT (AND CLEAR IT) ---
                         st.pyplot(xai_fig, clear_figure=True)
                     
-                        # Add the download button below the plot
-                        st.download_button(
-                            label=f"Download Snapshot for t={selected_t} as PDF",
-                            data=pdf_buf_xai,
-                            file_name=f"xai_snapshot_{st.session_state.dataset_name.replace(' ', '_')}_t{selected_t}.pdf",
-                            mime="application/pdf",
-                            key=f"download_xai_pdf_t{selected_t}" # Unique key to prevent state issues
-                        )
+                        # --- STEP 3: CREATE THE DOWNLOAD UI ---
+                        col1_dl, col2_dl = st.columns([1, 4])
+                        with col1_dl:
+                            file_format_xai = st.selectbox(
+                                "Format:",
+                                options=['SVG', 'PDF'],
+                                key=f"xai_format_select_{selected_t}" # Unique key
+                            )
+                        
+                        with col2_dl:
+                            if file_format_xai == 'SVG':
+                                st.download_button(
+                                    label=f"Download Snapshot as SVG",
+                                    data=svg_buf_xai,
+                                    file_name=f"xai_snapshot_{st.session_state.dataset_name.replace(' ', '_')}_t{selected_t}.svg",
+                                    mime="image/svg+xml",
+                                    key=f"download_xai_svg_{selected_t}"
+                                )
+                            else: # PDF
+                                st.download_button(
+                                    label=f"Download Snapshot as PDF",
+                                    data=pdf_buf_xai,
+                                    file_name=f"xai_snapshot_{st.session_state.dataset_name.replace(' ', '_')}_t{selected_t}.pdf",
+                                    mime="application/pdf",
+                                    key=f"download_xai_pdf_{selected_t}"
+                                )
     else:
         st.info("<- Upload a .pt file and click 'Load Data' to begin.")
 
