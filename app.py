@@ -231,7 +231,7 @@ def plot_ts_arm_evolution_streamlit(
     barcode_reward_colors = {1.0: PLOT_COLORS['success_reward'], 0.0: PLOT_COLORS['failure_reward']}
     posterior_draw_marker_style = {
         'marker': '.', 'color': PLOT_COLORS['posterior_draw_marker'],
-        's': 40, 'edgecolors': greys_cmap(0.6), 'linewidths': 0.3
+        's': 60, 'edgecolors': greys_cmap(0.6), 'linewidths': 0.3
     }
     legend_handles_main = {} # Collect handles for the figure-level legend
 
@@ -415,7 +415,7 @@ def plot_ts_arm_evolution_streamlit(
                     for _, pull_row in arm_pull_data.iterrows():
                         q_num, reward = pull_row['query_num_total'], pull_row['reward']
                         barcode_color = barcode_reward_colors.get(reward, PLOT_COLORS['posterior_draw_marker']) # Fallback color
-                        ax_barcode.plot([q_num, q_num], [0.05, 0.95], color=barcode_color, linestyle='-', linewidth=1, solid_capstyle='butt', zorder=3)
+                        ax_barcode.plot([q_num, q_num], [0.05, 0.95], color=barcode_color, linestyle='-', linewidth=2, solid_capstyle='butt', zorder=3)
             
             ax_barcode.set_yticks([]); ax_barcode.set_yticklabels([])
             ax_barcode.spines['left'].set_visible(False); ax_barcode.spines['top'].set_visible(False); ax_barcode.spines['right'].set_visible(False)
@@ -548,7 +548,7 @@ def plot_xai_snapshot_minimal(
     bars = ax.barh(y_pos, df_plot['posterior_mean'], align='center', color='darkgray', zorder=2, height=0.6)
     
     # Dots for posterior sample
-    ax.scatter(df_plot['posterior_sample'], y_pos, color='black', marker='o', s=80, zorder=3, ec='white', lw=1)
+    ax.scatter(df_plot['posterior_sample'], y_pos, color='black', marker='o', s=100, zorder=3, ec='white', lw=1)
     
     # --- NEW: Highlight the winning arm with a bold border ---
     if pulled_arm is not None:
