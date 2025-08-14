@@ -16,6 +16,9 @@ This repository is the official companion to the poster _"TS-Insight: Visual Fin
 
 ![Annotated excerpt of the TS-Insight Dashboard. Two arms are shown. Arm 8 has initially a higher posterior mean, which results in a lot of sampling by this arm. This focus shifts at the sampling step t=228, where arm 7 sampled, and had a positive outcome. Readers can see the samples starting to be made by Arm 7 instead of 8 from that point onwards.](./figures/TS-Insight_TwoArms_InkScape.png?raw=true)
 
+# Poster:
+[poster-IeeeVis.pdf](https://github.com/user-attachments/files/21775438/poster-IeeeVis.pdf)
+
 # Quickstart:
 
 Try our live webapp demo! All you have to do is:
