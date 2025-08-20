@@ -1,6 +1,7 @@
 # TS-Insight: Visual Fingerprinting of Multi-Armed Bandits
 A Visual-Analytics dashboard for visually decoding Thompson Sampling for algorithm understanding, verification, and XAI.
 
+[![Poster](https://img.shields.io/badge/Poster-IEEE%20VIS%202025-6f42c1.svg)](ts-insight_vis2025_poster.pdf)
 [![arXiv](https://img.shields.io/badge/arXiv-2507.19898-b31b1b.svg)](https://arxiv.org/abs/2507.19898)
 [![Demo](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ts-insight.streamlit.app/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -14,6 +15,10 @@ A Visual-Analytics dashboard for visually decoding Thompson Sampling for algorit
 
 This repository is the official companion to the poster _"TS-Insight: Visual Fingerprinting of Multi-Armed Bandits"_ @IEEE Vis 2025.
 
+## Poster (IEEE VIS 2025)
+<img width="3179" height="4494" alt="poster-IeeeVis" src="https://github.com/user-attachments/assets/89afe6bc-a383-47be-a33b-8208d0cd5998" />
+
+## Gallery
 ![Annotated excerpt of the TS-Insight Dashboard. Two arms are shown. Arm 8 has initially a higher posterior mean, which results in a lot of sampling by this arm. This focus shifts at the sampling step t=228, where arm 7 sampled, and had a positive outcome. Readers can see the samples starting to be made by Arm 7 instead of 8 from that point onwards.](./figures/TS-Insight_TwoArms_InkScape.png?raw=true)
 
 # Quickstart:
@@ -211,11 +216,8 @@ If you use **TS-Insight** or build upon the **idea, design, or visual explanatio
 # Author
 
 **Parsa Vares**  
-Luxembourg Institute of Science and Technology:
-parsa.vares@list.lu
-
-University of Luxembourg:
-parsa.vares.001@student.uni.lu
+*Luxembourg Institute of Science and Technology:* `parsa.vares@list.lu`  
+*University of Luxembourg:* `parsa.vares.001@student.uni.lu`
 
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github&style=flat-square)](https://github.com/parsavares) [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/parsavares/)
 
